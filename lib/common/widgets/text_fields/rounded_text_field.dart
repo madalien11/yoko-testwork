@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:yoko_testwork/const/colors.dart';
 
+final Shader linearGradient = const LinearGradient(
+        colors: <Color>[kPrimaryBlueColor, kSecondaryBlueColor])
+    .createShader(const Rect.fromLTWH(0.0, 0.0, 100.0, 50.0));
+
 class RoundedTextField extends StatelessWidget {
   const RoundedTextField({
     Key? key,
@@ -14,7 +18,7 @@ class RoundedTextField extends StatelessWidget {
     this.validator,
     this.onTap,
     this.fillColor = kWhite4,
-    this.textColor = kWhite50,
+    this.isGradient = false,
   }) : super(key: key);
   final String hintText;
   final IconData? icon;
@@ -25,7 +29,7 @@ class RoundedTextField extends StatelessWidget {
   final MultiValidator? validator;
   final Function? onTap;
   final Color? fillColor;
-  final Color? textColor;
+  final bool isGradient;
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +69,9 @@ class RoundedTextField extends StatelessWidget {
           suffix: const SizedBox(width: 8),
           hintText: hintText,
           hintStyle: TextStyle(
-            color: textColor,
+            color: !isGradient ? kWhite50 : null,
             fontSize: 16,
+            foreground: isGradient ? (Paint()..shader = linearGradient) : null,
           ),
           prefixIcon: icon != null
               ? Icon(

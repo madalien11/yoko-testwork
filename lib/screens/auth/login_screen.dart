@@ -15,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   bool _isObscure = true;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -85,10 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             _passwordController.text != ""
                         ? kWhite100
                         : kWhite4,
-                    textColor: _emailController.text != "" &&
+                    isGradient: _emailController.text != "" &&
                             _passwordController.text != ""
-                        ? kPrimaryBlueColor
-                        : kWhite50,
+                        ? true
+                        : false,
                     onTap: () {
                       setState(() {});
                     },
