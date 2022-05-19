@@ -13,6 +13,8 @@ class RoundedTextField extends StatelessWidget {
     this.suffix,
     this.validator,
     this.onTap,
+    this.fillColor = kWhite4,
+    this.textColor = kWhite50,
   }) : super(key: key);
   final String hintText;
   final IconData? icon;
@@ -22,6 +24,8 @@ class RoundedTextField extends StatelessWidget {
   final Widget? suffix;
   final MultiValidator? validator;
   final Function? onTap;
+  final Color? fillColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class RoundedTextField extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: kWhite4,
+          fillColor: fillColor,
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: kWhite8),
             borderRadius: BorderRadius.circular(12),
@@ -55,12 +59,13 @@ class RoundedTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: kWhite35),
             borderRadius: BorderRadius.circular(12),
           ),
           suffix: const SizedBox(width: 8),
           hintText: hintText,
-          hintStyle: const TextStyle(
-            color: kWhite50,
+          hintStyle: TextStyle(
+            color: textColor,
             fontSize: 16,
           ),
           prefixIcon: icon != null
