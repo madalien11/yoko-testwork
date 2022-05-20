@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:yoko_testwork/const/colors.dart';
+import 'package:yoko_testwork/const/text_styles.dart';
 
 final Shader linearGradient = const LinearGradient(
         colors: <Color>[kPrimaryBlueColor, kSecondaryBlueColor])
@@ -81,10 +82,7 @@ class RoundedTextField extends StatelessWidget {
               : null,
           suffixIcon: suffix,
         ),
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
+        style: kTextFieldTS,
       ),
     );
   }

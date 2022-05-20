@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoko_testwork/const/colors.dart';
+import 'package:yoko_testwork/const/text_styles.dart';
 
 class ActivitiesScreen extends StatefulWidget {
   const ActivitiesScreen({Key? key}) : super(key: key);
@@ -38,10 +39,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                   child: Text(
                     'Активности',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
+                    style: kAppBarBlackTS,
                   ),
                 ),
                 const SizedBox(
@@ -112,20 +110,13 @@ class ActivityCard extends StatelessWidget {
               children: [
                 const Text(
                   "Gorilla Chimba Park",
-                  style: TextStyle(
-                    color: kWhite100,
-                    fontSize: 21,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: kActivityCardTitleTS,
                 ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 200),
                   child: const Text(
                     "Оплачивайте частые услуги просто!",
-                    style: TextStyle(
-                      color: kWhite100,
-                      fontSize: 16,
-                    ),
+                    style: kActivityCardSubtitleTS,
                   ),
                 ),
               ],

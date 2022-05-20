@@ -5,6 +5,7 @@ import 'package:yoko_testwork/common/widgets/buttons/social_media_button.dart';
 import 'package:yoko_testwork/common/widgets/text_fields/rounded_text_field.dart';
 import 'package:yoko_testwork/const/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:yoko_testwork/const/text_styles.dart';
 import 'package:yoko_testwork/screens/activities/activities_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -51,11 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   const Text(
                     'Добро пожаловать,\nАвторизуйтесь',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: kHeader1TS,
                   ),
                   const SizedBox(height: 69),
                   RoundedTextField(
@@ -111,10 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: const Text(
                           'Регистрация',
-                          style: TextStyle(
-                            color: kWhite100,
-                            fontSize: 14,
-                          ),
+                          style: kWhiteTextTS,
                         ),
                       ),
                       GestureDetector(
@@ -123,10 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: const Text(
                           'Забыли пароль?',
-                          style: TextStyle(
-                            color: kWhite35,
-                            fontSize: 14,
-                          ),
+                          style: kGrayTextTS,
                         ),
                       ),
                     ],
@@ -138,10 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Center(
                         child: Text(
                           'Или войдите через:',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: kWhite100,
-                          ),
+                          style: kWhiteTextTS,
                         ),
                       ),
                       const SizedBox(height: 8),
