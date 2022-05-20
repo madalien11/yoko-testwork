@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoko_testwork/common/enums/enums.dart';
 import 'package:yoko_testwork/const/colors.dart';
 
 class SocialMediaButton extends StatelessWidget {
   const SocialMediaButton({
     Key? key,
-    required this.icon,
     required this.onTap,
+    required this.socialMedia,
   }) : super(key: key);
 
-  final IconData icon;
   final Function onTap;
+  final SocialMediaEnum socialMedia;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,12 @@ class SocialMediaButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: kWhite100),
         ),
-        child: Icon(icon, color: kWhite100),
+        child: SvgPicture.asset(
+          "assets/svg/${socialMediaIcon(socialMedia)}.svg",
+          fit: BoxFit.scaleDown,
+          semanticsLabel: 'Chevron Left',
+          color: kWhite100,
+        ),
       ),
     );
   }

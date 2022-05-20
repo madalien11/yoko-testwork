@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yoko_testwork/common/enums/enums.dart';
 import 'package:yoko_testwork/common/validation/validators.dart';
 import 'package:yoko_testwork/common/widgets/buttons/social_media_button.dart';
 import 'package:yoko_testwork/common/widgets/text_fields/rounded_text_field.dart';
 import 'package:yoko_testwork/const/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:yoko_testwork/screens/activities/activities_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -91,7 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? true
                         : false,
                     onTap: () {
-                      setState(() {});
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ActivitiesScreen(),
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(height: 16),
@@ -142,13 +149,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SocialMediaButton(
-                            icon: Icons.email,
+                            socialMedia: SocialMediaEnum.google,
                             onTap: () {
                               print('Google');
                             },
                           ),
                           SocialMediaButton(
-                            icon: Icons.facebook,
+                            socialMedia: SocialMediaEnum.facebook,
                             onTap: () {
                               print('Facebook');
                             },
