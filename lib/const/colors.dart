@@ -9,3 +9,6 @@ const kWhite8 = Color.fromRGBO(255, 255, 255, 0.08);
 const kWhite35 = Color.fromRGBO(255, 255, 255, 0.35);
 const kWhite50 = Color.fromRGBO(255, 255, 255, 0.5);
 const kWhite100 = Color.fromRGBO(255, 255, 255, 1.0);
+
+const kBlack35 = Color.fromRGBO(19, 19, 19, 0.35);
+const kBlack100 = Color.fromRGBO(19, 19, 19, 1.0);
