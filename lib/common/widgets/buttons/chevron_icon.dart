@@ -20,12 +20,13 @@ class ChevronIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: AlwaysStoppedAnimation(isRight ? 180 / 360 : 0),
-      child: GestureDetector(
-        onTap: onTap as Function()?,
-        child: SizedBox(
-          height: size,
-          width: size,
-          child: SvgPicture.asset(
+      child: SizedBox(
+        height: size,
+        width: size,
+        child: IconButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: onTap as Function()?,
+          icon: SvgPicture.asset(
             "assets/svg/chevron_left.svg",
             fit: BoxFit.scaleDown,
             semanticsLabel: 'Chevron Left',
