@@ -58,3 +58,8 @@ const TextStyle kBlueTextTS = TextStyle(
   fontSize: 14,
   color: kPrimaryBlueColor,
 );
+
+const TextStyle kTextButtonTitleTS = TextStyle(
+  color: kWhite100,
+  fontSize: 18,
+);
