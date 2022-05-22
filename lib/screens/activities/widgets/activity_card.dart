@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:yoko_testwork/common/widgets/style/custom_gradient.dart';
 import 'package:yoko_testwork/const/colors.dart';
 import 'package:yoko_testwork/const/text_styles.dart';
-import 'package:yoko_testwork/screens/activity/activity.dart';
+import 'package:yoko_testwork/models/activity/activity_model.dart';
+import 'package:yoko_testwork/screens/activities/activity/activity_screen.dart';
 
 class ActivityCard extends StatelessWidget {
   const ActivityCard({
     Key? key,
+    required this.activityModel,
   }) : super(key: key);
+
+  final ActivityModel activityModel;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,11 @@ class ActivityCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ActivityScreen()),
+          MaterialPageRoute(
+            builder: (context) => ActivityScreen(
+              activity: activityModel,
+            ),
+          ),
         );
       },
       child: Stack(
@@ -25,11 +33,9 @@ class ActivityCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: kPrimaryBlueColor,
               borderRadius: BorderRadius.circular(16),
-              image: const DecorationImage(
+              image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(
-                  'assets/img/splash.png',
-                ),
+                image: NetworkImage(activityModel.imageUrl),
               ),
             ),
             margin: const EdgeInsets.symmetric(vertical: 8),
@@ -66,8 +72,8 @@ class ActivityCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Gorilla Chimba Park",
+                Text(
+                  activityModel.nameRu,
                   style: kActivityCardTitleTS,
                 ),
                 ConstrainedBox(

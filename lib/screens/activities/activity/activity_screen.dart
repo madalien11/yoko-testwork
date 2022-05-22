@@ -1,34 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoko_testwork/common/utils/date_picker.dart';
 import 'package:yoko_testwork/common/widgets/buttons/blue_text_button.dart';
 import 'package:yoko_testwork/common/widgets/buttons/chevron_icon.dart';
 import 'package:yoko_testwork/common/widgets/buttons/text_chevron_button.dart';
 import 'package:yoko_testwork/const/colors.dart';
 import 'package:yoko_testwork/const/text_styles.dart';
+import 'package:yoko_testwork/models/activity/activity_model.dart';
 
 import 'widgets/activity_image.dart';
+import 'widgets/tariff_card.dart';
 
 const double bgImageHeightRatio = 0.36;
 
 class ActivityScreen extends StatefulWidget {
-  const ActivityScreen({Key? key}) : super(key: key);
+  const ActivityScreen({
+    Key? key,
+    required this.activity,
+  }) : super(key: key);
+
+  final ActivityModel activity;
 
   @override
   State<ActivityScreen> createState() => _ActivityScreenState();
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
+  String selectedDate = "Выберите дату";
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             ActivityImage(
-              title: "Gorilla Chimba Park",
+              title: widget.activity.nameRu,
+              img: widget.activity.imageUrl,
               height: height,
               bgImageHeightRatio: bgImageHeightRatio,
             ),
@@ -65,12 +77,12 @@ class _ActivityScreenState extends State<ActivityScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Row(
-                              children: const [
-                                Icon(Icons.calendar_today_rounded),
-                                SizedBox(width: 10),
-                                Text("Выберите дату", style: kBlackTextTS),
-                                Spacer(),
-                                ChevronIcon(
+                              children: [
+                                const Icon(Icons.calendar_today_rounded),
+                                const SizedBox(width: 10),
+                                Text(selectedDate, style: kBlackTextTS),
+                                const Spacer(),
+                                const ChevronIcon(
                                   size: 18,
                                   isRight: true,
                                 ),
@@ -88,50 +100,18 @@ class _ActivityScreenState extends State<ActivityScreen> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            selectedDate = await datePicker(
+                                  context,
+                                  widget.activity.availableDates,
+                                ) ??
+                                "Выберите дату";
+                            setState(() {});
+                          },
                         ),
                         const SizedBox(height: 16),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: kGrayButtonColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Взрослый старше 23 лет",
-                                    style: kBlackTextTS,
-                                  ),
-                                  Text(
-                                    "4 930 ₸",
-                                    style: kBlackSmallTextTS,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove_circle_outline,
-                                  size: 28,
-                                  color: kPrimaryBlueColor,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.add_circle_outline,
-                                  size: 28,
-                                  color: kPrimaryBlueColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        for (var p in widget.activity.tariffs)
+                          TariffCard(title: p.nameRu, priceInfo: p.priceInfo),
                         const SizedBox(height: 16),
                         BlueTextButton(
                           title: "Перейти к оплате",
@@ -140,7 +120,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       ],
                     ),
                   ),
-                  // const Spacer(),
                   const Divider(),
                   TextChevronButton(
                     text: "Правила поведения в сноупарке",

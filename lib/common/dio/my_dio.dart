@@ -17,7 +17,7 @@ class DioInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (options.path.contains('ticket-service') &&
+    if (options.path.contains('ticket-types') &&
         box.get('accessToken') != null) {
       options.headers['Authorization'] = 'Bearer ${box.get('accessToken')}';
     }

@@ -8,11 +8,13 @@ class ActivityImage extends StatelessWidget {
   const ActivityImage({
     Key? key,
     required this.title,
+    required this.img,
     required this.height,
     required this.bgImageHeightRatio,
   }) : super(key: key);
 
   final String title;
+  final String img;
   final double height;
   final double bgImageHeightRatio;
 
@@ -22,11 +24,11 @@ class ActivityImage extends StatelessWidget {
       children: [
         Container(
           height: height * bgImageHeightRatio,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: kPrimaryBlueColor,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage('assets/img/splash.png'),
+              image: NetworkImage(img),
             ),
           ),
         ),

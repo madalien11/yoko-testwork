@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:yoko_testwork/screens/activities/activities_screen.dart';
 import 'common/dependencies/injection_container.dart';
 import 'const/colors.dart';
+import 'screens/activities/bloc/activity_bloc.dart';
 import 'screens/auth/bloc/auth_bloc.dart';
 import 'screens/auth/login_screen.dart';
 
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
       ),
       home: Hive.box('tokens').get("accessToken") != null &&
               Hive.box('tokens').get("accessToken") != ""
-          ? const ActivitiesScreen()
+          ? BlocProvider(
+              create: (context) => ActivityBloc(activityServices: getIt()),
+              child: const ActivitiesScreen(),
+            )
           : BlocProvider(
               create: (context) => AuthBloc(authServices: getIt()),
               child: const LoginScreen(),

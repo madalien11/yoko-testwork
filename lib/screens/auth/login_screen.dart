@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yoko_testwork/common/dependencies/injection_container.dart';
 import 'package:yoko_testwork/common/enums/enums.dart';
 import 'package:yoko_testwork/common/validation/validators.dart';
 import 'package:yoko_testwork/common/widgets/buttons/social_media_button.dart';
@@ -10,6 +11,7 @@ import 'package:yoko_testwork/const/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:yoko_testwork/const/text_styles.dart';
 import 'package:yoko_testwork/screens/activities/activities_screen.dart';
+import 'package:yoko_testwork/screens/activities/bloc/activity_bloc.dart';
 
 import 'bloc/auth_bloc.dart';
 
@@ -66,7 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ActivitiesScreen(),
+                      builder: (context) => BlocProvider(
+                        create: (context) =>
+                            ActivityBloc(activityServices: getIt()),
+                        child: const ActivitiesScreen(),
+                      ),
                     ),
                   );
                 } else if (state is LoginUnsuccessful) {
