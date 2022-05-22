@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,12 @@ void main() async {
   await Hive.openBox('tokens');
 
   initGetIt();
-  runApp(const MyApp());
+  runApp(
+    // DevicePreview(
+    //   builder: (context) => const MyApp(),
+    // ),
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -28,9 +34,13 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+      // useInheritedMediaQuery: true,
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       title: 'Yoko Test',
       theme: ThemeData(
+        backgroundColor: Colors.white,
         primaryColor: kPrimaryBlueColor,
         fontFamily: 'Lato',
         errorColor: kPrimaryRedColor,

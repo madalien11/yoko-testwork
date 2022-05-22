@@ -30,117 +30,116 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            ActivityImage(
-              title: widget.activity.nameRu,
-              img: widget.activity.imageUrl,
-              height: height,
-              bgImageHeightRatio: bgImageHeightRatio,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height * bgImageHeightRatio - 50),
-              height: height * (1 - bgImageHeightRatio) + 50,
-              decoration: const BoxDecoration(
-                color: kWhite100,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                ),
+      body: Stack(
+        children: [
+          ActivityImage(
+            title: widget.activity.nameRu,
+            img: widget.activity.imageUrl,
+            height: height,
+            bgImageHeightRatio: bgImageHeightRatio,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: height * bgImageHeightRatio - 50),
+            height: height * (1 - bgImageHeightRatio) + 50,
+            decoration: const BoxDecoration(
+              color: kWhite100,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 19),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        const Text(
-                          "Дата посещения",
-                          style: kBlackBoldTextTS,
-                        ),
-                        const SizedBox(height: 3),
-                        const Text(
-                          "Подзаголовок в одну строку",
-                          style: kBlackSmallTextTS,
-                        ),
-                        const SizedBox(height: 12),
-                        const Divider(),
-                        const SizedBox(height: 12),
-                        TextButton(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.calendar_today_rounded),
-                                const SizedBox(width: 10),
-                                Text(selectedDate, style: kBlackTextTS),
-                                const Spacer(),
-                                const ChevronIcon(
-                                  size: 18,
-                                  isRight: true,
-                                ),
-                              ],
-                            ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 19),
+                Expanded(
+                  child: ListView(
+                    physics: const ClampingScrollPhysics(),
+                    padding: const EdgeInsets.all(0),
+                    children: [
+                      const Text(
+                        "Дата посещения",
+                        style: kBlackBoldTextTS,
+                      ),
+                      const SizedBox(height: 3),
+                      const Text(
+                        "Подзаголовок в одну строку",
+                        style: kBlackSmallTextTS,
+                      ),
+                      const SizedBox(height: 12),
+                      const Divider(),
+                      const SizedBox(height: 12),
+                      TextButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.calendar_today_rounded),
+                              const SizedBox(width: 10),
+                              Text(selectedDate, style: kBlackTextTS),
+                              const Spacer(),
+                              const ChevronIcon(
+                                size: 18,
+                                isRight: true,
+                              ),
+                            ],
                           ),
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                side: const BorderSide(
-                                  color: kPrimaryGrayColor,
-                                ),
+                        ),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              side: const BorderSide(
+                                color: kPrimaryGrayColor,
                               ),
                             ),
                           ),
-                          onPressed: () async {
-                            selectedDate = await datePicker(
-                                  context,
-                                  widget.activity.availableDates,
-                                ) ??
-                                "Выберите дату";
-                            setState(() {});
-                          },
                         ),
-                        const SizedBox(height: 16),
-                        for (var p in widget.activity.tariffs)
-                          TariffCard(title: p.nameRu, priceInfo: p.priceInfo),
-                        const SizedBox(height: 16),
-                        BlueTextButton(
-                          title: "Перейти к оплате",
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                        onPressed: () async {
+                          selectedDate = await datePicker(
+                                context,
+                                widget.activity.availableDates,
+                              ) ??
+                              "Выберите дату";
+                          setState(() {});
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      for (var p in widget.activity.tariffs)
+                        TariffCard(title: p.nameRu, priceInfo: p.priceInfo),
+                      const SizedBox(height: 16),
+                      BlueTextButton(
+                        title: "Перейти к оплате",
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
-                  const Divider(),
-                  TextChevronButton(
-                    text: "Правила поведения в сноупарке",
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const Divider(),
-                  TextChevronButton(
-                    text: "Позвонить",
-                    isBlue: true,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const SizedBox(height: 3),
-                ],
-              ),
+                ),
+                // const Spacer(),
+                const Divider(),
+                TextChevronButton(
+                  text: "Правила поведения в сноупарке",
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const Divider(),
+                TextChevronButton(
+                  text: "Позвонить",
+                  isBlue: true,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(height: MediaQuery.of(context).padding.bottom),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
