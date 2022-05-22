@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:yoko_testwork/common/dependencies/injection_container.dart';
 import 'package:yoko_testwork/common/widgets/buttons/chevron_icon.dart';
 import 'package:yoko_testwork/const/text_styles.dart';
+import 'package:yoko_testwork/screens/auth/bloc/auth_bloc.dart';
+import 'package:yoko_testwork/screens/auth/login_screen.dart';
 
 import 'widgets/activity_card.dart';
 
@@ -24,7 +29,18 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                 ChevronIcon(
                   size: 50,
                   onTap: () {
-                    Navigator.pop(context);
+                    var box = Hive.box('tokens');
+                    box.delete("accessToken");
+                    box.delete("refreshToken");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => AuthBloc(authServices: getIt()),
+                          child: const LoginScreen(),
+                        ),
+                      ),
+                    );
                   },
                 ),
                 const Expanded(
